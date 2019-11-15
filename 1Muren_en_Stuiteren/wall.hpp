@@ -15,6 +15,10 @@ class wall : public drawable {
         
     }
 
+    void update() override {
+      floatRekt = sf::Rect<float>(position, formaat);
+    }
+
   private:
     sf::Vector2f formaat;
 };

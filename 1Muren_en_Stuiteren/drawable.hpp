@@ -13,6 +13,10 @@ class drawable {
         position += delta;
     }
 
+    void move() {
+        position += speed;
+    }
+
     void jump(sf::Vector2f target) {
         position = target;
     }
@@ -21,9 +25,14 @@ class drawable {
         jump(sf::Vector2f(static_cast<float>(target.x), static_cast<float>(target.y)));
     }
 
+    virtual void update() {
+        floatRekt = sf::Rect<float>(position, sf::Vector2f(2*size, 2*size));
+    }
+
   protected:
     sf::Vector2f position;
     sf::Color Color;
     float size;
     sf::Vector2f speed;
+    sf::Rect<float> floatRekt;
 };

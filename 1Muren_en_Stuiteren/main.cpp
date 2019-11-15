@@ -15,7 +15,8 @@ int main(int argc, char* argv[]) {
                         action(sf::Keyboard::Right, [&]() { blokje.move(sf::Vector2f(+2.0, 0.0)); }),
                         action(sf::Keyboard::Up, [&]() { blokje.move(sf::Vector2f(0.0, -2.0)); }),
                         action(sf::Keyboard::Down, [&]() { blokje.move(sf::Vector2f(0.0, +2.0)); }),
-                        action(sf::Mouse::Left, [&]() { blokje.jump(sf::Mouse::getPosition(window)); })};
+                        action(sf::Mouse::Left, [&]() { blokje.jump(sf::Mouse::getPosition(window)); }),
+                        action([&]{my_ball.move();})};
 
     while (window.isOpen()) {
         for (auto& action : actions) {
