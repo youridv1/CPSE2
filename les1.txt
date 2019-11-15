@@ -1,0 +1,19 @@
+Lambda's:
+  [](parameter){body}
+  simpelste vorm []{}
+    auto increment = [](int & n){return ++n;}
+
+  lambda's doorgeven met templates
+    template< typename T >
+    void pass_a_lambda(T lambda ){
+      lambda();
+    }
+
+  #include <functional>
+  std::function< return(parameter) > f;
+
+  captures:
+    [ & ] by reference
+    [ = ] by value
+    [ &var ] die variabele bij reference
+    [ line ] die variabele bij value
