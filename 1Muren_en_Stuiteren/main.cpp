@@ -11,7 +11,6 @@ int main(int argc, char* argv[]) {
     wall right_wall{sf::Vector2f{620.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
     wall blokje{sf::Vector2f{320.0, 240.0}, sf::Vector2f{30.0, 30.0}, sf::Color::Red};
 
-
     action actions[] = {action(sf::Keyboard::Left, [&]() { blokje.move(sf::Vector2f(-2.0, 0.0)); }),
                         action(sf::Keyboard::Right, [&]() { blokje.move(sf::Vector2f(+2.0, 0.0)); }),
                         action(sf::Keyboard::Up, [&]() { blokje.move(sf::Vector2f(0.0, -2.0)); }),
