@@ -10,10 +10,10 @@ int main(int argc, char* argv[]) {
     wall left_wall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
     wall right_wall{sf::Vector2f{620.0, 0.0}, sf::Vector2f{640.0, 480.0}, sf::Color::Yellow};
 
-    action actions[] = {action(sf::Keyboard::Left, [&]() { my_ball.move(sf::Vector2f(-1.0, 0.0)); }),
-                        action(sf::Keyboard::Right, [&]() { my_ball.move(sf::Vector2f(+1.0, 0.0)); }),
-                        action(sf::Keyboard::Up, [&]() { my_ball.move(sf::Vector2f(0.0, -1.0)); }),
-                        action(sf::Keyboard::Down, [&]() { my_ball.move(sf::Vector2f(0.0, +1.0)); }),
+    action actions[] = {action(sf::Keyboard::Left, [&]() { my_ball.move(sf::Vector2f(-2.0, 0.0)); }),
+                        action(sf::Keyboard::Right, [&]() { my_ball.move(sf::Vector2f(+2.0, 0.0)); }),
+                        action(sf::Keyboard::Up, [&]() { my_ball.move(sf::Vector2f(0.0, -2.0)); }),
+                        action(sf::Keyboard::Down, [&]() { my_ball.move(sf::Vector2f(0.0, +2.0)); }),
                         action(sf::Mouse::Left, [&]() { my_ball.jump(sf::Mouse::getPosition(window)); })};
 
     while (window.isOpen()) {
