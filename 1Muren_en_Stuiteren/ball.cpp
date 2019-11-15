@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "ball.hpp"
 
-ball::ball( sf::Vector2f position, sf::Color Color, float size ):
-	drawable(position, Color, size)
+ball::ball( sf::Vector2f position, sf::Color Color, float size, sf::Vector2f speed ):
+	drawable(position, Color, size, speed)
 {}
 
 void ball::draw( sf::RenderWindow & window ) const {

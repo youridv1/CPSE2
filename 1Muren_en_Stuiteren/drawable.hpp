@@ -6,8 +6,8 @@ class drawable {
   public:
     virtual void draw(sf::RenderWindow& window) const = 0;
     
-    drawable(sf::Vector2f position, sf::Color Color, float size = 30.0)
-        : position(position), Color(Color), size(size) {}
+    drawable(sf::Vector2f position, sf::Color Color, float size = 30.0, sf::Vector2f speed = sf::Vector2f(0.0, 0.0))
+        : position(position), Color(Color), size(size), speed(speed) {}
 
     void move(sf::Vector2f delta) {
         position += delta;
@@ -25,4 +25,5 @@ class drawable {
     sf::Vector2f position;
     sf::Color Color;
     float size;
+    sf::Vector2f speed;
 };

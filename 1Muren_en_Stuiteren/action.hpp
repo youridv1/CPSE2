@@ -36,6 +36,12 @@ public:
 		work(work)
 	{}
 
+	action(
+		std::function< void() > work ):
+			condition( []{ return true; } ),
+			work(work)
+	{}
+
 	void operator()(){
 		if( condition() ){
 			work();
