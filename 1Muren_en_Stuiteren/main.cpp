@@ -21,16 +21,15 @@ int main(int argc, char* argv[]) {
                         action(sf::Mouse::Left, [&]() { block.jump(sf::Mouse::getPosition(window)); }),
                         };
 
-    action ballActions[] = {
-                        action([&](){return ballPtr->intersect(block.getFloatRekt());}, [&](){ballPtr->bounce(block.getFloatRekt()); }),
-                        action([&](){return ballPtr->intersect(bottomWall.getFloatRekt());}, [&](){ballPtr->bounce(bottomWall.getFloatRekt()); }),
-                        action([&](){return ballPtr->intersect(topWall.getFloatRekt());}, [&](){ballPtr->bounce(topWall.getFloatRekt()); }),
-                        action([&](){return ballPtr->intersect(leftWall.getFloatRekt());}, [&](){ballPtr->bounce(leftWall.getFloatRekt()); }),
-                        action([&](){return ballPtr->intersect(rightWall.getFloatRekt());}, [&](){ballPtr->bounce(rightWall.getFloatRekt()); }),
-                        action([&](){return ballPtr->intersect(myBall.getFloatRekt());}, [&](){ballPtr->bounce(myBall.getFloatRekt(), myBall.getSpeed()); }),
-                        action([&](){return ballPtr->intersect(mySecondBall.getFloatRekt());}, [&](){ballPtr->bounce(mySecondBall.getFloatRekt(), mySecondBall.getSpeed()); }),
-                        action([&]{ballPtr->move();})
-                        };
+    action ballActions[] = {action([&](){return ballPtr->intersect(block.getFloatRekt());}, [&](){ballPtr->bounce(block); }),
+                            action([&](){return ballPtr->intersect(bottomWall.getFloatRekt());}, [&](){ballPtr->bounce(bottomWall); }),
+                            action([&](){return ballPtr->intersect(topWall.getFloatRekt());}, [&](){ballPtr->bounce(topWall); }),
+                            action([&](){return ballPtr->intersect(leftWall.getFloatRekt());}, [&](){ballPtr->bounce(leftWall); }),
+                            action([&](){return ballPtr->intersect(rightWall.getFloatRekt());}, [&](){ballPtr->bounce(rightWall); }),
+                            action([&](){return ballPtr->intersect(myBall.getFloatRekt());}, [&](){ballPtr->bounce(myBall); }),
+                            action([&](){return ballPtr->intersect(mySecondBall.getFloatRekt());}, [&](){ballPtr->bounce(mySecondBall); }),
+                            action([&]{ballPtr->move();})
+                            };
 
     ball* balls[] = {&myBall, &mySecondBall};
     std::vector<drawable*> drawables = {&topWall, &bottomWall, &rightWall, &leftWall, &block};

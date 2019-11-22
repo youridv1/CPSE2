@@ -24,3 +24,7 @@ SEARCH  :=
 # and defer to the Makefile.due there
 RELATIVE := $(RELATIVE)../../v2cpse2-examples/
 include $(RELATIVE)Makefile.native
+
+schoon:
+	make clean
+	rm -f main
