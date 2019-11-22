@@ -7,7 +7,7 @@ class drawable {
     virtual void draw(sf::RenderWindow& window) const = 0;
     
     drawable(sf::Vector2f position, sf::Color Color, float size = 30.0, sf::Vector2f speed = sf::Vector2f(0.0, 0.0))
-        : position(position), Color(Color), size(size), speed(speed) {}
+        : position(position), Color(Color), size(size), speed(speed) { update(); }
 
     void move(sf::Vector2f delta) {
         position += delta;
@@ -29,10 +29,28 @@ class drawable {
         floatRekt = sf::Rect<float>(position, sf::Vector2f(2*size, 2*size));
     }
 
+    sf::Vector2f getSpeed(){
+        return speed;
+    }
+
+    void setSpeed(const sf::Vector2f s){
+        speed = s;
+    }
+
+    bool intersect( const sf::Rect<float> & rectangle){
+        return floatRekt.intersects(rectangle);
+    }
+
+    sf::Rect<float> getFloatrekt(){
+        return floatRekt;
+    }
+
+    sf::Rect<float> floatRekt;
+
   protected:
     sf::Vector2f position;
     sf::Color Color;
     float size;
     sf::Vector2f speed;
-    sf::Rect<float> floatRekt;
+    
 };

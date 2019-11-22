@@ -16,7 +16,13 @@ int main(int argc, char* argv[]) {
                         action(sf::Keyboard::Up, [&]() { blokje.move(sf::Vector2f(0.0, -2.0)); }),
                         action(sf::Keyboard::Down, [&]() { blokje.move(sf::Vector2f(0.0, +2.0)); }),
                         action(sf::Mouse::Left, [&]() { blokje.jump(sf::Mouse::getPosition(window)); }),
-                        action([&]{my_ball.move();})};
+                        action([&]{my_ball.move();}),
+                        action( [&](){  return my_ball.intersect(bottom_wall.floatRekt);    } , [&](){my_ball.setSpeed(sf::Vector2f(-1.0, -1.0)); }),
+                        action( [&](){  return my_ball.intersect(top_wall.floatRekt);    } , [&](){my_ball.setSpeed(sf::Vector2f(1.0, 1.0)); }),
+                        action([&]{my_ball.update();}),
+                        action([&]{bottom_wall.update();}),
+                        action([&]{top_wall.update();})
+                        };
 
     while (window.isOpen()) {
         for (auto& action : actions) {
