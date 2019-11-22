@@ -19,6 +19,7 @@ class drawable {
 
     void move(sf::Vector2f delta) {
         position += delta;
+        update();
     }
 
     void move() {
@@ -27,6 +28,7 @@ class drawable {
         } else {
             position.y += speed.y;
         }
+        update();
         direction = !direction;        
     }
 
@@ -40,29 +42,23 @@ class drawable {
 
     void jump(sf::Vector2f target) {
         position = target;
+        update();
     }
 
     void jump(sf::Vector2i target) {
         jump(sf::Vector2f(static_cast<float>(target.x), static_cast<float>(target.y)));
+        update();
     }
 
     virtual void update() {
         floatRekt = sf::Rect<float>(position, sf::Vector2f(2*size, 2*size));
     }
 
-    sf::Vector2f getSpeed(){
-        return speed;
-    }
-
-    void setSpeed(const sf::Vector2f s){
-        speed = s;
-    }
-
     bool intersect( const sf::Rect<float> & rectangle){
         return floatRekt.intersects(rectangle);
     }
 
-    sf::Rect<float> getFloatrekt(){
+    sf::Rect<float> getFloatRekt(){
         return floatRekt;
     }
 
@@ -82,10 +78,8 @@ class drawable {
         }
     }
 
-    sf::Rect<float> floatRekt;
-    
-
   protected:
+    sf::Rect<float> floatRekt;
     bool direction;
     sf::Vector2f position;
     sf::Color Color;

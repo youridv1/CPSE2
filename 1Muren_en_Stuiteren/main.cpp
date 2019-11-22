@@ -1,43 +1,59 @@
 #include "ball.hpp"
 #include "action.hpp"
 #include "wall.hpp"
+#include "vector"
 
 int main(int argc, char* argv[]) {
     sf::RenderWindow window{sf::VideoMode{640, 480}, "SFML window"};
-    ball my_ball{sf::Vector2f{320.0, 240.0}, sf::Color::Blue};
-    wall top_wall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{640.0, 20.0}, sf::Color::Yellow};
-    wall bottom_wall{sf::Vector2f{0.0, 460.0}, sf::Vector2f{640.0, 20.0}, sf::Color::Yellow};
-    wall left_wall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
-    wall right_wall{sf::Vector2f{620.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
-    wall blokje{sf::Vector2f{320.0, 240.0}, sf::Vector2f{30.0, 30.0}, sf::Color::Red};
+    ball* ballPtr;
+    ball myBall{sf::Vector2f{320.0, 240.0}, sf::Color::Blue};
+    ball mySecondBall{sf::Vector2f{240.0, 320.0}, sf::Color::Green};
+    wall topWall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{640.0, 20.0}, sf::Color::Yellow};
+    wall bottomWall{sf::Vector2f{0.0, 460.0}, sf::Vector2f{640.0, 20.0}, sf::Color::Yellow};
+    wall leftWall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
+    wall rightWall{sf::Vector2f{620.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
+    wall block{sf::Vector2f{320.0, 240.0}, sf::Vector2f{30.0, 30.0}, sf::Color::Red};
 
-    action actions[] = {action(sf::Keyboard::Left, [&]() { blokje.move(sf::Vector2f(-2.0, 0.0)); }),
-                        action(sf::Keyboard::Right, [&]() { blokje.move(sf::Vector2f(+2.0, 0.0)); }),
-                        action(sf::Keyboard::Up, [&]() { blokje.move(sf::Vector2f(0.0, -2.0)); }),
-                        action(sf::Keyboard::Down, [&]() { blokje.move(sf::Vector2f(0.0, +2.0)); }),
-                        action(sf::Mouse::Left, [&]() { blokje.jump(sf::Mouse::getPosition(window)); }),
-                        action([&](){return my_ball.intersect(blokje.floatRekt);}, [&](){my_ball.bounce(blokje.floatRekt); }),
-                        action([&](){return my_ball.intersect(bottom_wall.floatRekt);}, [&](){my_ball.bounce(bottom_wall.floatRekt); }),
-                        action([&](){return my_ball.intersect(top_wall.floatRekt);}, [&](){my_ball.bounce(top_wall.floatRekt); }),
-                        action([&](){return my_ball.intersect(left_wall.floatRekt);}, [&](){my_ball.bounce(left_wall.floatRekt); }),
-                        action([&](){return my_ball.intersect(right_wall.floatRekt);}, [&](){my_ball.bounce(right_wall.floatRekt); }),
-                        action([&]{blokje.update();}),
-                        action([&]{my_ball.move();}),
-                        action([&]{my_ball.update();})
+    action actions[] = {action(sf::Keyboard::Left, [&]() { block.move(sf::Vector2f(-2.0, 0.0)); }),
+                        action(sf::Keyboard::Right, [&]() { block.move(sf::Vector2f(+2.0, 0.0)); }),
+                        action(sf::Keyboard::Up, [&]() { block.move(sf::Vector2f(0.0, -2.0)); }),
+                        action(sf::Keyboard::Down, [&]() { block.move(sf::Vector2f(0.0, +2.0)); }),
+                        action(sf::Mouse::Left, [&]() { block.jump(sf::Mouse::getPosition(window)); }),
                         };
+
+    action ballActions[] = {
+                        action([&](){return ballPtr->intersect(block.getFloatRekt());}, [&](){ballPtr->bounce(block.getFloatRekt()); }),
+                        action([&](){return ballPtr->intersect(bottomWall.getFloatRekt());}, [&](){ballPtr->bounce(bottomWall.getFloatRekt()); }),
+                        action([&](){return ballPtr->intersect(topWall.getFloatRekt());}, [&](){ballPtr->bounce(topWall.getFloatRekt()); }),
+                        action([&](){return ballPtr->intersect(leftWall.getFloatRekt());}, [&](){ballPtr->bounce(leftWall.getFloatRekt()); }),
+                        action([&](){return ballPtr->intersect(rightWall.getFloatRekt());}, [&](){ballPtr->bounce(rightWall.getFloatRekt()); }),
+                        action([&]{ballPtr->move();})
+                        };
+
+    ball* balls[] = {&myBall, &mySecondBall};
+    std::vector<drawable*> drawables = {&topWall, &bottomWall, &rightWall, &leftWall, &block};
+    for(auto* ball : balls){
+        drawables.push_back(ball);
+    }
 
     while (window.isOpen()) {
         for (auto& action : actions) {
             action();
         }
+        
+        for (ball* ball : balls){
+            ballPtr = ball;
+            for (auto& action : ballActions) {
+                action();
+            }
+        }
 
         window.clear();
-        my_ball.draw(window);
-        top_wall.draw(window);
-        bottom_wall.draw(window);
-        left_wall.draw(window);
-        right_wall.draw(window);
-        blokje.draw(window);
+
+        for(auto* drawable : drawables){
+            drawable->draw(window);
+        }
+
         window.display();
 
         sf::sleep(sf::milliseconds(2));
