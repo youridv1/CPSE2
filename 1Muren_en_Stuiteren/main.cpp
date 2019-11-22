@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
                         action([&](){return my_ball.intersect(top_wall.floatRekt);}, [&](){my_ball.bounce(top_wall.floatRekt); }),
                         action([&](){return my_ball.intersect(left_wall.floatRekt);}, [&](){my_ball.bounce(left_wall.floatRekt); }),
                         action([&](){return my_ball.intersect(right_wall.floatRekt);}, [&](){my_ball.bounce(right_wall.floatRekt); }),
-                        action([&]{right_wall.update();}),
+                        action([&]{blokje.update();}),
                         action([&]{my_ball.move();}),
                         action([&]{my_ball.update();})
                         };

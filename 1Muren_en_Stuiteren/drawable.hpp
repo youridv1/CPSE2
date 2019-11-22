@@ -83,11 +83,11 @@ class drawable {
     }
 
     sf::Rect<float> floatRekt;
-    sf::Vector2f position;
+    
 
   protected:
     bool direction;
-    
+    sf::Vector2f position;
     sf::Color Color;
     float size;
     sf::Vector2f speed;
