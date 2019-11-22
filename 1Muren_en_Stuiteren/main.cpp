@@ -16,12 +16,14 @@ int main(int argc, char* argv[]) {
                         action(sf::Keyboard::Up, [&]() { blokje.move(sf::Vector2f(0.0, -2.0)); }),
                         action(sf::Keyboard::Down, [&]() { blokje.move(sf::Vector2f(0.0, +2.0)); }),
                         action(sf::Mouse::Left, [&]() { blokje.jump(sf::Mouse::getPosition(window)); }),
+                        action([&](){return my_ball.intersect(blokje.floatRekt);}, [&](){my_ball.bounce(blokje.floatRekt); }),
+                        action([&](){return my_ball.intersect(bottom_wall.floatRekt);}, [&](){my_ball.bounce(bottom_wall.floatRekt); }),
+                        action([&](){return my_ball.intersect(top_wall.floatRekt);}, [&](){my_ball.bounce(top_wall.floatRekt); }),
+                        action([&](){return my_ball.intersect(left_wall.floatRekt);}, [&](){my_ball.bounce(left_wall.floatRekt); }),
+                        action([&](){return my_ball.intersect(right_wall.floatRekt);}, [&](){my_ball.bounce(right_wall.floatRekt); }),
+                        action([&]{right_wall.update();}),
                         action([&]{my_ball.move();}),
-                        action( [&](){  return my_ball.intersect(bottom_wall.floatRekt);    } , [&](){my_ball.setSpeed(sf::Vector2f(-1.0, -1.0)); }),
-                        action( [&](){  return my_ball.intersect(top_wall.floatRekt);    } , [&](){my_ball.setSpeed(sf::Vector2f(1.0, 1.0)); }),
-                        action([&]{my_ball.update();}),
-                        action([&]{bottom_wall.update();}),
-                        action([&]{top_wall.update();})
+                        action([&]{my_ball.update();})
                         };
 
     while (window.isOpen()) {
@@ -38,7 +40,7 @@ int main(int argc, char* argv[]) {
         blokje.draw(window);
         window.display();
 
-        sf::sleep(sf::milliseconds(20));
+        sf::sleep(sf::milliseconds(2));
 
         sf::Event event;
         while (window.pollEvent(event)) {

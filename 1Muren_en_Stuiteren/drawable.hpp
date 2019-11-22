@@ -1,20 +1,41 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class drawable {
   public:
     virtual void draw(sf::RenderWindow& window) const = 0;
     
-    drawable(sf::Vector2f position, sf::Color Color, float size = 30.0, sf::Vector2f speed = sf::Vector2f(0.0, 0.0))
-        : position(position), Color(Color), size(size), speed(speed) { update(); }
+    drawable(sf::Vector2f position, sf::Color Color, float size = 30.0, sf::Vector2f speed = sf::Vector2f(0.0, 0.0)):
+        position(position),
+        Color(Color),
+        size(size),
+        speed(speed) 
+        {
+            update();
+            direction = true;
+        }
 
     void move(sf::Vector2f delta) {
         position += delta;
     }
 
     void move() {
-        position += speed;
+        if(direction){
+            position.x += speed.x;
+        } else {
+            position.y += speed.y;
+        }
+        direction = !direction;        
+    }
+
+    void moveX(){
+        position.x += speed.x;
+    }
+
+    void moveY(){
+        position.y += speed.y;
     }
 
     void jump(sf::Vector2f target) {
@@ -45,10 +66,28 @@ class drawable {
         return floatRekt;
     }
 
+    void bounce(const sf::Rect<float> & rectangle){
+        if(!direction){
+            speed.x *= -1.0;
+            while(intersect(rectangle)){
+                moveX();
+                update();
+            }
+        } else {
+            speed.y *= -1.0;
+            while(intersect(rectangle)){
+                moveY();
+                update();
+            }
+        }
+    }
+
     sf::Rect<float> floatRekt;
+    sf::Vector2f position;
 
   protected:
-    sf::Vector2f position;
+    bool direction;
+    
     sf::Color Color;
     float size;
     sf::Vector2f speed;

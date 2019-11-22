@@ -4,7 +4,7 @@
 
 class wall : public drawable {
   public:
-    wall(sf::Vector2f position, sf::Vector2f formaat, sf::Color Color,  float size = 30.0) : drawable(position, Color, size), formaat(formaat) {}
+    wall(sf::Vector2f position, sf::Vector2f formaat, sf::Color Color,  float size = 30.0) : drawable(position, Color, size), formaat(formaat) {update();}
 
     void draw(sf::RenderWindow& window) const {
         sf::RectangleShape rectangle;
