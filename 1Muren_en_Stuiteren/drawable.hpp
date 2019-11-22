@@ -33,11 +33,11 @@ class drawable {
     }
 
     void moveX(){
-        position.x += speed.x;
+        position.x += speed.x*2;
     }
 
     void moveY(){
-        position.y += speed.y;
+        position.y += speed.y*2;
     }
 
     void jump(sf::Vector2f target) {
@@ -55,27 +55,38 @@ class drawable {
     }
 
     bool intersect( const sf::Rect<float> & rectangle){
-        return floatRekt.intersects(rectangle);
+        if(rectangle != floatRekt){
+            return floatRekt.intersects(rectangle);
+        }
+        return false;
     }
 
     sf::Rect<float> getFloatRekt(){
         return floatRekt;
     }
 
-    void bounce(const sf::Rect<float> & rectangle){
-        if(!direction){
-            speed.x *= -1.0;
-            while(intersect(rectangle)){
-                moveX();
-                update();
+    void bounce(const sf::Rect<float> & rectangle, const sf::Vector2f & otherSpeed = sf::Vector2f(0.0, 0.0)){
+        if(otherSpeed.x == 0 || otherSpeed.y == 0){
+            if(!direction){
+                speed.x *= -1.0;
+                while(intersect(rectangle)){
+                    moveX();
+                    update();
+                }
+            } else {
+                speed.y *= -1.0;
+                while(intersect(rectangle)){
+                    moveY();
+                    update();
+                }
             }
         } else {
-            speed.y *= -1.0;
-            while(intersect(rectangle)){
-                moveY();
-                update();
-            }
+            speed += otherSpeed;
         }
+    }
+
+    sf::Vector2f getSpeed(){
+        return speed;
     }
 
   protected:
