@@ -7,7 +7,6 @@ int main(int argc, char* argv[]) {
     sf::RenderWindow window{sf::VideoMode{640, 480}, "SFML window"};
     ball* ballPtr;
     ball myBall{sf::Vector2f{320.0, 240.0}, sf::Color::Blue};
-    ball mySecondBall{sf::Vector2f{240.0, 320.0}, sf::Color::Green, 30.0, sf::Vector2f{1.0, 0.5}};
     wall topWall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{640.0, 20.0}, sf::Color::Yellow};
     wall bottomWall{sf::Vector2f{0.0, 460.0}, sf::Vector2f{640.0, 20.0}, sf::Color::Yellow};
     wall leftWall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
@@ -26,12 +25,10 @@ int main(int argc, char* argv[]) {
                             action([&](){return ballPtr->intersect(topWall.getFloatRekt());}, [&](){ballPtr->bounce(topWall); }),
                             action([&](){return ballPtr->intersect(leftWall.getFloatRekt());}, [&](){ballPtr->bounce(leftWall); }),
                             action([&](){return ballPtr->intersect(rightWall.getFloatRekt());}, [&](){ballPtr->bounce(rightWall); }),
-                            action([&](){return ballPtr->intersect(myBall.getFloatRekt());}, [&](){ballPtr->bounce(myBall); }),
-                            action([&](){return ballPtr->intersect(mySecondBall.getFloatRekt());}, [&](){ballPtr->bounce(mySecondBall); }),
                             action([&]{ballPtr->move();})
                             };
 
-    ball* balls[] = {&myBall, &mySecondBall};
+    ball* balls[] = {&myBall};
     std::vector<drawable*> drawables = {&topWall, &bottomWall, &rightWall, &leftWall, &block};
     for(auto* ball : balls){
         drawables.push_back(ball);
