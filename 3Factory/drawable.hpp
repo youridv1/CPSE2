@@ -6,13 +6,13 @@
 
 class drawable {
   public:
-    virtual void draw(sf::RenderWindow& window) const = 0;
-    
     drawable(sf::Vector2f position, sf::Vector2f size = sf::Vector2f(30.0, 30.0), sf::Color Color = sf::Color::White ):
         position(position),
         size(size),
         Color(Color)
     {}
+
+    virtual void draw(sf::RenderWindow& window) const = 0;
 
     void move() {}
 
