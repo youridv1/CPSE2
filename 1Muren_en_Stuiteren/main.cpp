@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
     wall bottomWall{sf::Vector2f{0.0, 460.0}, sf::Vector2f{640.0, 20.0}, sf::Color::Yellow};
     wall leftWall{sf::Vector2f{0.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
     wall rightWall{sf::Vector2f{620.0, 0.0}, sf::Vector2f{20.0, 480.0}, sf::Color::Yellow};
-    wall block{sf::Vector2f{320.0, 240.0}, sf::Vector2f{30.0, 30.0}, sf::Color::Red};
+    wall block{sf::Vector2f{320.0, 240.0}, sf::Vector2f{30.0, 130.0}, sf::Color::Red};
 
     action actions[] = {action(sf::Keyboard::Left, [&]() { block.move(sf::Vector2f(-2.0, 0.0)); }),
                         action(sf::Keyboard::Right, [&]() { block.move(sf::Vector2f(+2.0, 0.0)); }),

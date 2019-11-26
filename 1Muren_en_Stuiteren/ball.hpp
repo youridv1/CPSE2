@@ -1,5 +1,5 @@
-#ifndef _BALL_HPP
-#define _BALL_HPP
+#ifndef BALL_HPP
+#define BALL_HPP
 
 #include "drawable.hpp"
 

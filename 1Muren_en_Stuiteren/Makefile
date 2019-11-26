@@ -15,6 +15,7 @@ SOURCES := ball.cpp
 HEADERS += ball.hpp
 HEADERS += drawable.hpp
 HEADERS += wall.hpp
+HEADERS += action.hpp
 
 
 # other places to look for files for this project
