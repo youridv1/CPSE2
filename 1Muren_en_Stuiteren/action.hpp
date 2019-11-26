@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_HPP
+#define ACTION_HPP
 
 #include <iostream>
 #include <functional>
@@ -48,3 +49,5 @@ public:
 		}
 	}
 };
+
+#endif

@@ -12,4 +12,3 @@ void ball::draw( sf::RenderWindow & window ) const {
 	circle.setFillColor(Color);
 	window.draw(circle);
 }
-

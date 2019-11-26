@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DRAWABLE_HPP
+#define DRAWABLE_HPP
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -94,3 +95,5 @@ class drawable {
     float size;
     sf::Vector2f speed;
 };
+
+#endif
