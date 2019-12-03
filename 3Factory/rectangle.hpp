@@ -5,7 +5,7 @@
 
 class rectangle : public drawable {
     public:
-        rectangle(sf::Vector2f position, sf::Vector2f size = sf::Vector2f(30.0, 30.0), sf::Color Color = sf::Color::White ):
+        rectangle(sf::Vector2f position, sf::Vector2f size = sf::Vector2f(60.0, 60.0), sf::Color Color = sf::Color::White ):
             drawable(position, size, Color)
         {}
 

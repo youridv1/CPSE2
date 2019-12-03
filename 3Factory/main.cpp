@@ -17,7 +17,7 @@ int main(){
         Rekt.draw(window);
         window.display();
 
-        sf::sleep(sf::milliseconds(1));
+        sf::sleep(sf::milliseconds(2));
 
         sf::Event event;
         while (window.pollEvent(event)) {
