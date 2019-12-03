@@ -10,14 +10,14 @@ int main(){
     rectangle Rekt(sf::Vector2f(320.0, 240.0));
 
     while(window.isOpen()){
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && Rekt.contains(sf::Mouse::getPosition())){
             Rekt.jump(sf::Mouse::getPosition(window));
         }
         window.clear();
         Rekt.draw(window);
         window.display();
 
-        sf::sleep(sf::milliseconds(2));
+        sf::sleep(sf::milliseconds(1));
 
         sf::Event event;
         while (window.pollEvent(event)) {
