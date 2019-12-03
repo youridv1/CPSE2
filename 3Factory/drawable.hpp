@@ -14,8 +14,6 @@ class drawable {
 
     virtual void draw(sf::RenderWindow& window) const = 0;
 
-    void move() {}
-
     void jump(sf::Vector2f target) {
         position = target;
     }
@@ -26,8 +24,8 @@ class drawable {
 
   protected:
     sf::Vector2f position;
-    sf::Color Color;
     sf::Vector2f size;
+    sf::Color Color;
 };
 
 #endif
