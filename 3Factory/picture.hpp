@@ -14,6 +14,10 @@ public:
         sprite.setPosition(position);
         sprite.setScale(sf::Vector2f(0.1, 0.1));
     }
+
+    void draw( sf::RenderWindow & window)const override {
+		window.draw(sprite);
+	}
     
 private:
     std::string filename;

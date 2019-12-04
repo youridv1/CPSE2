@@ -12,7 +12,7 @@ int main(){
         for(;;){
             drawables.push_back(drawable_read(input));
         }
-    }catch(end_of_file){
+    }catch(end_of_file &){
 
     }catch(std::exception & error){
         std::cerr << error.what();
@@ -21,16 +21,20 @@ int main(){
     sf::RenderWindow window{sf::VideoMode{640, 480}, "SFML window"};
 
     while(window.isOpen()){
-        window.clear();
         for(auto & object : drawables){        
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && object->contains(sf::Mouse::getPosition())){
                 object->jump(sf::Mouse::getPosition(window));
+                std::cout << "hoi";
             }
+        }
+
+        window.clear();
+        for(auto & object : drawables){
             object->draw(window);
         }
         window.display();
 
-        sf::sleep(sf::milliseconds(2));
+        sf::sleep(sf::milliseconds(1));
 
         sf::Event event;
         while (window.pollEvent(event)) {
