@@ -3,9 +3,21 @@
 #include "line.hpp"
 #include "picture.hpp"
 #include "factory.hpp"
-
+#include <iostream>
 
 int main(){
+    std::vector<std::unique_ptr<drawable>> drawables;
+    std::ifstream input("factory.txt");
+    try {
+        for(;;){
+            drawables.push_back(drawable_read(input));
+        }
+    }catch(end_of_file){
+
+    }catch(std::exception & error){
+        std::cerr << error.what();
+    }
+
     sf::RenderWindow window{sf::VideoMode{640, 480}, "SFML window"};
     rectangle Rekt(sf::Vector2f(320.0, 240.0));
 
