@@ -17,6 +17,7 @@ HEADERS += rectangle.hpp
 HEADERS += line.hpp
 HEADERS += picture.hpp
 HEADERS += factory.hpp
+HEADERS += exception.hpp
 
 
 # other places to look for files for this project
