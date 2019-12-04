@@ -19,14 +19,15 @@ int main(){
     }
 
     sf::RenderWindow window{sf::VideoMode{640, 480}, "SFML window"};
-    rectangle Rekt(sf::Vector2f(320.0, 240.0));
 
     while(window.isOpen()){
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && Rekt.contains(sf::Mouse::getPosition())){
-            Rekt.jump(sf::Mouse::getPosition(window));
-        }
         window.clear();
-        Rekt.draw(window);
+        for(auto & object : drawables){        
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && object->contains(sf::Mouse::getPosition())){
+                object->jump(sf::Mouse::getPosition(window));
+            }
+            object->draw(window);
+        }
         window.display();
 
         sf::sleep(sf::milliseconds(2));
