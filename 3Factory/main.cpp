@@ -13,7 +13,7 @@ int main(){
             drawables.push_back(drawable_read(input));
         }
     }catch(end_of_file &){
-
+        // do nothing
     }catch(std::exception & error){
         std::cerr << error.what();
     }
@@ -21,9 +21,9 @@ int main(){
     sf::RenderWindow window{sf::VideoMode{640, 480}, "SFML window"};
 
     while(window.isOpen()){
-        for(auto & object : drawables){        
-            if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && object->contains(sf::Mouse::getPosition())){
-                object->jump(sf::Mouse::getPosition(window));
+        for(auto & obj : drawables){        
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && obj->contains(sf::Mouse::getPosition())){
+                obj->jump(sf::Mouse::getPosition(window));
                 std::cout << "hoi";
             }
         }
