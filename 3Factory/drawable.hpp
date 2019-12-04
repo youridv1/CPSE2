@@ -2,6 +2,7 @@
 #define DRAWABLE_HPP
 
 #include <SFML/Graphics.hpp>
+#include <fstream>
 
 class drawable {
 public:
@@ -29,7 +30,31 @@ public:
             point.y >= position.y + 40.0 && 
             point.y <= position.y + size.y + 40.0; 
   }
+  
+  void writeGeneral(std::ofstream & output){
+    output << "(" << position.x << "," << position.y << ") "; 
+  }
 
+  virtual void writeType(std::ofstream & output){}
+
+  virtual void writeSpecific(std::ofstream & output){}
+
+  void writeColor(std::ostream& output) { 
+	const struct { const char* name; sf::Color color; } colors[]{
+    { "yellow", sf::Color::Yellow },
+    { "red",    sf::Color::Red },
+    { "green",    sf::Color::Green },
+    { "blue",    sf::Color::Blue },
+    { "black",    sf::Color::Black },
+    { "white",    sf::Color::White },
+    };
+    for (auto const & colour : colors) {
+      if (colour.color == Color) {
+        output << colour.name << " ";
+      }
+    }
+  }
+  
 protected:
   sf::Vector2f position;
   sf::Vector2f size;

@@ -17,6 +17,12 @@ public:
         circle.setFillColor(Color);
         window.draw(circle);
     }
+
+    void writeType(std::ofstream & output) override { output << "CIRCLE ";}
+
+    void writeSpecific(std::ofstream & output) override {
+        output << radius << '\n';
+    }
     
 protected:
     float radius; 

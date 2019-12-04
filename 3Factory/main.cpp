@@ -8,6 +8,7 @@
 int main(){
     std::vector<std::unique_ptr<drawable>> drawables;
     std::ifstream input("factory.txt");
+    bool errorOccurred = false;
     try {
         for(;;){
             drawables.push_back(drawable_read(input));
@@ -16,6 +17,7 @@ int main(){
         // do nothing
     }catch(std::exception & error){
         std::cerr << error.what();
+        errorOccurred = true;
     }
 
     sf::RenderWindow window{sf::VideoMode{640, 480}, "SFML window"};
@@ -40,6 +42,14 @@ int main(){
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+        }
+    }
+    if(!errorOccurred){
+        std::ofstream output("factory.txt");
+        for(auto & obj : drawables){
+            obj->writeGeneral(output);
+            obj->writeType(output);
+            obj->writeSpecific(output);
         }
     }
 }

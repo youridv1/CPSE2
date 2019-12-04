@@ -16,6 +16,15 @@ public:
         rectangle.setFillColor(Color);
         window.draw(rectangle); 
     }
+
+    void writeType(std::ofstream & output) override { output << "RECTANGLE ";}
+
+    void writeSpecific(std::ofstream & output) override {
+        writeColor(output);
+		output << "(" << size.x << "," << size.y << ")\n";
+    }
+
+
 };
 
 #endif

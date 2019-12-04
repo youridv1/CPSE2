@@ -35,6 +35,12 @@ public:
         sprite.setPosition(position);
     }
 
+    void writeType(std::ofstream & output) override { output << "PICTURE ";}
+
+    void writeSpecific(std::ofstream & output) override {
+        output << filename << '\n';
+    }
+
     
 private:
     std::string filename;
