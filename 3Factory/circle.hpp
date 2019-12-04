@@ -6,7 +6,7 @@
 class circle : public drawable {
 public:
     circle(sf::Vector2f position, float radius, sf::Color Color = sf::Color::White, sf::Vector2f size = sf::Vector2f(0.0, 0.0)):
-        drawable(position, size, Color),
+        drawable(position, sf::Vector2f(2*radius, 2*radius), Color),
         radius(radius)
     {}
 

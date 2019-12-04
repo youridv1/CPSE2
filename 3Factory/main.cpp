@@ -24,7 +24,6 @@ int main(){
         for(auto & obj : drawables){        
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && obj->contains(sf::Mouse::getPosition())){
                 obj->jump(sf::Mouse::getPosition(window));
-                std::cout << "hoi";
             }
         }
 

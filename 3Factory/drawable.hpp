@@ -13,7 +13,7 @@ public:
 
   virtual void draw(sf::RenderWindow& window) const = 0;
 
-  void jump(sf::Vector2f target) {
+  virtual void jump(sf::Vector2f target) {
       position.x = target.x - size.x / 2;
       position.y = target.y - size.y / 2;
   }
@@ -22,7 +22,7 @@ public:
       jump(sf::Vector2f(static_cast<float>(target.x), static_cast<float>(target.y)));
   }
 
-  bool contains(const sf::Vector2i & point){
+  virtual bool contains(const sf::Vector2i & point){
     return point.x >= position.x && 
             point.x <= position.x + size.x && 
             // When using a custom window size, some of the Y coordinates end up offset by about 40 pixels
