@@ -4,18 +4,18 @@
 #include "drawable.hpp"
 
 class rectangle : public drawable {
-    public:
-        rectangle(sf::Vector2f position, sf::Vector2f size = sf::Vector2f(60.0, 60.0), sf::Color Color = sf::Color::White ):
-            drawable(position, size, Color)
-        {}
+public:
+    rectangle(sf::Vector2f position, sf::Vector2f size = sf::Vector2f(60.0, 60.0), sf::Color Color = sf::Color::White ):
+        drawable(position, size, Color)
+    {}
 
-        void draw(sf::RenderWindow& window) const {
-            sf::RectangleShape rectangle;
-            rectangle.setPosition(position);
-            rectangle.setSize(size);
-            rectangle.setFillColor(Color);
-            window.draw(rectangle); 
-        }
+    void draw(sf::RenderWindow& window) const {
+        sf::RectangleShape rectangle;
+        rectangle.setPosition(position);
+        rectangle.setSize(size);
+        rectangle.setFillColor(Color);
+        window.draw(rectangle); 
+    }
 };
 
 #endif
