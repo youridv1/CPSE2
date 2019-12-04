@@ -48,6 +48,19 @@ std::unique_ptr<drawable> drawable_read(std::ifstream & input){
     float radius;
     input >> position >> name;
 
+    if(name == "CIRCLE"){
+        input >> color >> radius;
+        return std::make_unique<circle>(position, radius, color);
+    }else if(name == "RECTANGLE"){
+        input >> color >> size;
+        return std::make_unique<rectangle>(position, size, color);
+    }else if(name == "PICTURE"){
+        input >> filename;
+        return std::make_unique<picture>(position, filename);
+    }else if(name == ""){
+        throw end_of_file();
+    }
+    throw unknown_shape( name );
 }
 
 #endif
