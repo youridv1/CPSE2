@@ -21,6 +21,7 @@ public:
     void writeType(std::ofstream & output) override { output << "CIRCLE ";}
 
     void writeSpecific(std::ofstream & output) override {
+        writeColor(output);
         output << radius << '\n';
     }
     
