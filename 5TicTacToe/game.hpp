@@ -1,20 +1,22 @@
+#ifndef GAME_HPP
+#define GAME_HPP
+
 #include "move.hpp"
 #include <vector>
 #include "interface.hpp"
+#include <iostream>
 
 class TicTacToe {
 private:
-    std::vector<move> moves;
-    myInterface interface;
+    std::vector<myMove> moves;
+    myInterface& interface;
 
 public:
-    TicTacToe(const myInterface& interface):
+    TicTacToe(myInterface& interface):
         interface( interface )
-    {
-        main();
-    }
+    {}
 
-    int move( const move m ){
+    void move( const myMove m ){
         moves.push_back(m);
     }
 
@@ -47,7 +49,7 @@ public:
         }
         std::vector<std::vector<bool>*> pos = {&leftVert, &midVert, &rightVert, &topHor, &midHor, &botHor, &diagUp, &diagDown};
         for(auto p : pos){
-            if(p->size() == 3 && p[0] == p[1] && p[0] == p[2]){
+            if(p->size() == 3 && p->at(0) == p->at(1) && p->at(0) == p->at(2)){
                 return 1;
             }
         }
@@ -61,11 +63,17 @@ public:
 
     void main(){
         bool player = 0;
-        while( checkWin() == 0 ){
-            move(interface.getMove());
-            player = !player;
+        while( checkWin() == 0.0 ){
+            move(interface.getMove(player));
             interface.draw(moves);
+            player = !player;
         }
-        interface.endGame(checkWin());
+        if(checkWin() == 0.5){
+            interface.endGame( 0.5 );
+        } else {
+            interface.endGame(getLastPlayer());
+        }   
     }
 };
+
+#endif

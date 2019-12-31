@@ -1,12 +1,15 @@
+#ifndef MOVE_HPP
+#define MOVE_HPP
+
 #include <array>
 
-class move {
+class myMove {
 private:
     bool player;
     std::array<int, 2> coord;
 
 public:
-    move(const bool& p, const int& x, const int& y):
+    myMove(const bool& p, const int& x, const int& y):
         player( p ),
         coord( {x, y} )
     {}
@@ -15,3 +18,5 @@ public:
 
     std::array<int, 2> getMove(){ return coord; }  
 };
+
+#endif
