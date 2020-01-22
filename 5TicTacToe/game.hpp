@@ -5,19 +5,39 @@
 #include <vector>
 #include "interface.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 class TicTacToe {
 private:
     std::vector<myMove> moves;
     myInterface& interface;
+    bool lastMoveUndo = false; // Used for preventing that Undo can be spammed rapidly
 
 public:
     TicTacToe(myInterface& interface):
         interface( interface )
     {}
 
-    void move( const myMove m ){
+    bool move( myMove m ){
+        if((m.getMove()[0] == -2 || m.getMove()[1] == -2) && !lastMoveUndo){
+            lastMoveUndo = true;
+            if(!moves.empty()){
+                moves.pop_back();
+                return true;
+            }
+            return false;
+        }
+        lastMoveUndo = false;
+        for(auto move : moves){
+            if(m.getMove() == move.getMove()){
+                return false;
+            }
+        }
+        if(!(m.getMove()[0] == -1 || m.getMove()[1] == -1)){
         moves.push_back(m);
+        return true;
+        }
+        return false;
     }
 
     float checkWin(){
@@ -45,7 +65,7 @@ public:
             if(y == 1){midHor.push_back( player );}
             if(y == 2){botHor.push_back( player );}
             if(x == y){diagDown.push_back( player );}
-            if(x == 0 && y == 2 || x == 1 && y == 1 || x == 2 && y == 0){diagUp.push_back(player);}
+            if((x == 0 && y == 2) || (x == 1 && y == 1) || (x == 2 && y == 0)){diagUp.push_back(player);}
         }
         std::vector<std::vector<bool>*> pos = {&leftVert, &midVert, &rightVert, &topHor, &midHor, &botHor, &diagUp, &diagDown};
         for(auto p : pos){
@@ -64,9 +84,11 @@ public:
     void main(){
         bool player = 0;
         while( checkWin() == 0.0 ){
-            move(interface.getMove(player));
-            interface.draw(moves);
+            if(move(interface.getMove(player))){
             player = !player;
+            }
+            interface.draw(moves);
+            sf::sleep(sf::milliseconds(10));
         }
         if(checkWin() == 0.5){
             interface.endGame( 0.5 );

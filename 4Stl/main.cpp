@@ -6,7 +6,7 @@
 #include <cctype>
 #include <map>
 #include <sstream>
-#include <SFML/Graphics.hpp>
+#include <iterator>
 
 int main() {
     //1.

@@ -1,3 +1,3 @@
-(4,25) CIRCLE blue 30
-(352,275) RECTANGLE red (30,30)
-(562.5,38.5) PICTURE image.jpeg
+(278,142) CIRCLE blue 30
+(144,154) RECTANGLE red (30,30)
+(-376.5,29.5) PICTURE image.jpeg

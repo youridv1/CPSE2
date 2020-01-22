@@ -8,6 +8,7 @@ class cli : public myInterface {
 public:
     void draw(std::vector<myMove> & moves) override {
         bool found = false;
+        std::cout << std::endl;
         for(int y = 0; y < 3; y++){
             for(int x = 0; x < 3; x++){
                 found = false;
@@ -32,13 +33,14 @@ public:
                 std::cout << '\n' << "-----------" << '\n';
             }
         }
+        std::cout << std::endl;
     }
 
     myMove getMove(const bool player) override {
         int x, y;
-        std::cout << "\nGive X coordinate: ";
+        std::cout << "\nPlayer " << player + 1 << " give X coordinate: ";
         std::cin >> x;
-        std::cout << "\nGive Y coordinate: ";
+        std::cout << "\nPlayer " << player + 1 << " give Y coordinate: ";
         std::cin >> y;
         myMove playedMove(player, x, y);
         return playedMove;
@@ -48,7 +50,7 @@ public:
         if(state == 0.5){
             std::cout << "\ndraw!\n";
         } else {
-            std::cout << "\nplayer " << state + 1 << " wins!\n";
+            std::cout << "\nPlayer " << state + 1 << " wins!\n";
         }
     }
 };
