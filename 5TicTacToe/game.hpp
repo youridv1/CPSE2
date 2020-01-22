@@ -11,7 +11,6 @@ class TicTacToe {
 private:
     std::vector<myMove> moves;
     myInterface& interface;
-    bool lastMoveUndo = false; // Used for preventing that Undo can be spammed rapidly
 
 public:
     TicTacToe(myInterface& interface):
@@ -19,15 +18,14 @@ public:
     {}
 
     bool move( myMove m ){
-        if((m.getMove()[0] == -2 || m.getMove()[1] == -2) && !lastMoveUndo){
-            lastMoveUndo = true;
-            if(!moves.empty()){
+        if(m.getMove()[0] == -2 || m.getMove()[1] == -2){ // If true then Undo
+            if(!moves.empty()){ // Segfault protection
                 moves.pop_back();
+                sf::sleep(sf::milliseconds(500)); // Spam protection
                 return true;
             }
             return false;
         }
-        lastMoveUndo = false;
         for(auto move : moves){
             if(m.getMove() == move.getMove()){
                 return false;
