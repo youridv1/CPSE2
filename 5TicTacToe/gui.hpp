@@ -44,7 +44,7 @@ public:
         // If Clicked
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){ 
             int x, y;
-            auto pos = sf::Mouse::getPosition();
+            auto pos = sf::Mouse::getPosition(window);
             // Check for Undo
             if(pos.x > 655){
                 return myMove(-2, -2 , -2);
